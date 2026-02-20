@@ -10,10 +10,11 @@ int multiplyNumbers(int x, int y) {
 
 int main(void) {
     int a = 5; //uninitvar, legacyUninitvar
-    int b = 10; //uninitvar, legacyUninitvar
+    int b = 5; //uninitvar, legacyUninitvar
     int result = multiplyNumbers(a, b);
 
     int arr[NUM_ELEMENTS];
+    
     for(int i = 0; i < NUM_ELEMENTS; i++) { //arrayIndexOutOfBounds
         arr[i] = i;
     }
