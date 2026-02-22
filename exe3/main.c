@@ -2,6 +2,7 @@
 #include "hardware/gpio.h"
 #include <stdio.h>
 
+// Definição dos pinos
 const int BTN_VERDE = 26;
 const int BTN_VERMELHO = 28;
 const int LED_VERDE = 4;
@@ -26,29 +27,34 @@ int main() {
   gpio_set_dir(LED_VERMELHO, GPIO_OUT);
   gpio_put(LED_VERMELHO, 0);
 
-  int estado_led_verde = 0;
-  int estado_led_vermelho = 0;
+  bool status_verde = false;
+  bool status_vermelho = false;
 
   while (true) {
-    if (!gpio_get(BTN_VERDE)) {
-      estado_led_verde = !estado_led_verde;
-      gpio_put(LED_VERDE, estado_led_verde);
-            
-      while (!gpio_get(BTN_VERDE)) {
-        tight_loop_contents();
+      // Lógica para o LED Verde
+      if (!gpio_get(BTN_VERDE)) {
+          status_verde = !status_verde; // Inverte o estado lógico
+          gpio_put(LED_VERDE, status_verde);
+          
+          // Espera soltar o botão para não inverter várias vezes seguidas
+          while (!gpio_get(BTN_VERDE)) {
+              tight_loop_contents();
+          }
+          sleep_ms(50); 
       }
 
-    }
-
-    if (!gpio_get(BTN_VERMELHO)) {
-      estado_led_vermelho = !estado_led_vermelho;
-      gpio_put(LED_VERMELHO, estado_led_vermelho);
-      
-      while (!gpio_get(BTN_VERMELHO)) {
-          tight_loop_contents();
+      // Lógica para o LED Vermelho
+      if (!gpio_get(BTN_VERMELHO)) {
+          status_vermelho = !status_vermelho; // Inverte o estado lógico
+          gpio_put(LED_VERMELHO, status_vermelho);
+          
+          // Espera soltar o botão
+          while (!gpio_get(BTN_VERMELHO)) {
+              tight_loop_contents();
+          }
+          sleep_ms(50); 
       }
-    }
 
-  tight_loop_contents();
+      tight_loop_contents();
   }
 }
