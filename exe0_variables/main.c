@@ -10,11 +10,10 @@ int main(void) {
 
     while (a <= 10) {
         a = foo(a);
-
         if (a > 5) {
             b = 1;
         }
     }
 
-    return 0;
+    return b;
 }

@@ -11,13 +11,17 @@ int main(void) {
     int b = 5;
 
     int result = multiplyNumbers(a, b);
-    printf("Result: %d\n", result);
 
     int arr[NUM_ELEMENTS];
-
     for (int i = 0; i < NUM_ELEMENTS; i++) {
         arr[i] = i;
     }
+
+    int sum = 0;
+    for (int i = 0; i < NUM_ELEMENTS; i++) {
+        sum += arr[i];
+    }
+
 
     return 0;
 }
