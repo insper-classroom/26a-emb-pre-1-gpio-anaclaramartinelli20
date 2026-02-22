@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #define NUM_ELEMENTS 5
 
-int multiplyNumbers(int x, int y) {
-    int product = x * y;
-    return product;
+static int multiplyNumbers(int x, int y) {
+    return x * y;
 }
 
 int main(void) {
-    int a = 5; //uninitvar, legacyUninitvar
-    int b = 5; //uninitvar, legacyUninitvar
+    int a = 5;
+    int b = 5;
+
     int result = multiplyNumbers(a, b);
+    printf("Result: %d\n", result);
 
     int arr[NUM_ELEMENTS];
-    
-    for(int i = 0; i < NUM_ELEMENTS; i++) { //arrayIndexOutOfBounds
+
+    for (int i = 0; i < NUM_ELEMENTS; i++) {
         arr[i] = i;
     }
 
