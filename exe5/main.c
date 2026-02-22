@@ -8,12 +8,10 @@ const int BTN_PIN_2 = 7;
 int main() {
     stdio_init_all();
 
-    // Configuração Botão 1
     gpio_init(BTN_PIN);
     gpio_set_dir(BTN_PIN, GPIO_IN);
     gpio_pull_up(BTN_PIN);
 
-    // Configuração Botão 2
     gpio_init(BTN_PIN_2);
     gpio_set_dir(BTN_PIN_2, GPIO_IN);
     gpio_pull_up(BTN_PIN_2);
@@ -24,28 +22,36 @@ int main() {
     while (true) {
         // Lógica para o Botão 1
         if (!gpio_get(BTN_PIN)) {
-            cnt_1++;
-            printf("Botao 1: %d\n", cnt_1);
+            sleep_ms(50); // Espera a vibração mecânica inicial passar
             
-            // Debouncing: Espera o botão ser solto
-            while (!gpio_get(BTN_PIN)) {
-                tight_loop_contents();
+            // Confirma se o botão realmente continuou pressionado
+            if (!gpio_get(BTN_PIN)) { 
+                cnt_1++;
+                printf("Botao 1: %d\n", cnt_1);
+                
+                // Segura o loop até o botão ser solto
+                while (!gpio_get(BTN_PIN)) {
+                    sleep_ms(10); 
+                }
             }
-            sleep_ms(50); // Pausa para ignorar o ruído mecânico (bouncing)
         }
 
         // Lógica para o Botão 2
         if (!gpio_get(BTN_PIN_2)) {
-            cnt_2++;
-            printf("Botao 2: %d\n", cnt_2);
+            sleep_ms(50); // Espera a vibração mecânica inicial passar
             
-            // Debouncing: Espera o botão ser solto
-            while (!gpio_get(BTN_PIN_2)) {
-                tight_loop_contents();
+            // Confirma se o botão realmente continuou pressionado
+            if (!gpio_get(BTN_PIN_2)) { 
+                cnt_2++;
+                printf("Botao 2: %d\n", cnt_2);
+                
+                // Segura o loop até o botão ser solto
+                while (!gpio_get(BTN_PIN_2)) {
+                    sleep_ms(10); 
+                }
             }
-            sleep_ms(50); // Pausa para ignorar o ruído mecânico
         }
-
-        tight_loop_contents();
+        
+        sleep_ms(10); 
     }
-    }
+}
