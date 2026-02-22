@@ -5,8 +5,8 @@
 // Definição dos pinos
 const int BTN_VERDE = 26;
 const int BTN_VERMELHO = 28;
-const int LED_VERDE = 4;
-const int LED_VERMELHO = 6;
+const int LED_VERMELHO = 4;
+const int LED_VERDE = 6;
 
 int main() {
   stdio_init_all();
