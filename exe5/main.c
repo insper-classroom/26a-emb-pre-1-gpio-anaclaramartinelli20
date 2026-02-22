@@ -22,36 +22,36 @@ int main() {
     while (true) {
         // Lógica para o Botão 1
         if (!gpio_get(BTN_PIN)) {
-            sleep_ms(50); // Espera a vibração mecânica inicial passar
+            sleep_ms(50); //  Ignora a trepidação ao apertar
             
-            // Confirma se o botão realmente continuou pressionado
             if (!gpio_get(BTN_PIN)) { 
                 cnt_1++;
                 printf("Botao 1: %d\n", cnt_1);
                 
-                // Segura o loop até o botão ser solto
+                // Trava o código enquanto o botão está sendo segurado
                 while (!gpio_get(BTN_PIN)) {
-                    sleep_ms(10); 
+                    tight_loop_contents();
                 }
+                
+                sleep_ms(50); // Ignora a trepidação ao soltar 
             }
         }
 
         // Lógica para o Botão 2
         if (!gpio_get(BTN_PIN_2)) {
-            sleep_ms(50); // Espera a vibração mecânica inicial passar
+            sleep_ms(50); // Ignora a trepidação ao apertar
             
-            // Confirma se o botão realmente continuou pressionado
             if (!gpio_get(BTN_PIN_2)) { 
                 cnt_2++;
                 printf("Botao 2: %d\n", cnt_2);
                 
-                // Segura o loop até o botão ser solto
+                // Trava o código enquanto o botão está sendo segurado
                 while (!gpio_get(BTN_PIN_2)) {
-                    sleep_ms(10); 
+                    tight_loop_contents();
                 }
+                
+                sleep_ms(50); // Ignora a trepidação ao soltar
             }
         }
-        
-        sleep_ms(10); 
     }
 }
