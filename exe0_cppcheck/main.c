@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #define NUM_ELEMENTS 5
 
 static int multiplyNumbers(int x, int y) {
@@ -22,6 +20,5 @@ int main(void) {
         sum += arr[i];
     }
 
-
-    return 0;
+    return result + sum;
 }
