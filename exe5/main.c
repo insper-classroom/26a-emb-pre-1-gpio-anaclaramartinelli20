@@ -19,38 +19,38 @@ int main() {
     int cnt_1 = 0;
     int cnt_2 = 0;
 
+    int state_btn_1 = 0;
+    int state_btn_2 = 0;
+
     while (true) {
-        // Lógica para o Botão 1
-        if (!gpio_get(BTN_PIN)) {
-            sleep_ms(10); //  Ignora a trepidação ao apertar
-            
+    
+        if (!gpio_get(BTN_PIN) && state_btn_1 == 0) {
+            sleep_ms(15); // Filtra o ruído ao apertar
             if (!gpio_get(BTN_PIN)) { 
+                state_btn_1 = 1;
                 cnt_1++;
-                printf("Botao 1: %d\n", cnt_1);
-                
-                // Trava o código enquanto o botão está sendo segurado
-                while (!gpio_get(BTN_PIN)) {
-                    tight_loop_contents();
-                }
-                
-                sleep_ms(10); // Ignora a trepidação ao soltar 
+                printf("Botao 1: %d\n", cnt_1); 
+            }
+        } 
+        else if (gpio_get(BTN_PIN) && state_btn_1 == 1) {
+            sleep_ms(15); // Filtra o ruído ao soltar
+            if (gpio_get(BTN_PIN)) { 
+                state_btn_1 = 0; 
             }
         }
 
-        // Lógica para o Botão 2
-        if (!gpio_get(BTN_PIN_2)) {
-            sleep_ms(10); // Ignora a trepidação ao apertar
-            
-            if (!gpio_get(BTN_PIN_2)) { 
+        if (!gpio_get(BTN_PIN_2) && state_btn_2 == 0) {
+            sleep_ms(15);
+            if (!gpio_get(BTN_PIN_2)) {
+                state_btn_2 = 1;
                 cnt_2++;
-                printf("Botao 2: %d\n", cnt_2);
-                
-                // Trava o código enquanto o botão está sendo segurado
-                while (!gpio_get(BTN_PIN_2)) {
-                    tight_loop_contents();
-                }
-                
-                sleep_ms(10); // Ignora a trepidação ao soltar
+                printf("Botao 2: %d\n", cnt_2); 
+            }
+        } 
+        else if (gpio_get(BTN_PIN_2) && state_btn_2 == 1) {
+            sleep_ms(15);
+            if (gpio_get(BTN_PIN_2)) {
+                state_btn_2 = 0;
             }
         }
     }
