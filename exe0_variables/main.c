@@ -1,19 +1,20 @@
-#include <stdio.h> 
+#include <stdio.h>
 
-int a = 0; 
-int b = 0; 
-
-void foo(void) {
-    a = a + 1;
+static int foo(int a) {
+    return a + 1;
 }
 
 int main(void) {
-    while (a <= 10) { 
-        foo();
-        
+    int a = 0;
+    int b = 0;
+
+    while (a <= 10) {
+        a = foo(a);
+
         if (a > 5) {
             b = 1;
         }
     }
+
     return 0;
 }
