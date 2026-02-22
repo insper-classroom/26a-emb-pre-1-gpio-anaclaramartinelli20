@@ -36,18 +36,15 @@ void seven_seg_display(int valor_para_exibir) {
 
 int main() {
     stdio_init_all();
-    
-    int BUTTON_GPIO = FIRST_GPIO + 7; 
+        
     int cnt = 0;
-    int last_btn = 1; 
-    int aux = 0;
+    int last_btn = 1;
 
     gpio_init(BTN_PIN_G);
     gpio_set_dir(BTN_PIN_G, GPIO_IN);
     gpio_pull_up(BTN_PIN_G);
 
     seven_seg_init();
-    
     seven_seg_display(cnt); 
 
     while (true) {
@@ -59,7 +56,6 @@ int main() {
             }
             
             seven_seg_display(cnt); 
-            
             printf("cnt: %d\n", cnt); 
         }
         
